@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">News App</string>
+    <string name="error">Failed to get,Result please try again</string>
+</resources>
