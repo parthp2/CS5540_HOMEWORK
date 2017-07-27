@@ -16,6 +16,7 @@ import java.util.Scanner;
 
 public class NetworkUtils {
 
+    private static  final String n= Key.key_value;
 
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
@@ -32,12 +33,12 @@ public class NetworkUtils {
     final static String API_PARA ="apiKey" ;
 
 
-    public static URL buildUrl(String apikey)
+    public static URL buildUrl()
     {
         Uri builtUri= Uri.parse(BASE_URL).buildUpon()
                 .appendQueryParameter(SOURCE_PARA,source)
                 .appendQueryParameter(SORT_PARA,sortby)
-                .appendQueryParameter(API_PARA,apikey)
+                .appendQueryParameter(API_PARA,n)
                 .build();
 
         URL url=null;
@@ -61,6 +62,8 @@ public class NetworkUtils {
 
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+
         try {
             InputStream in = urlConnection.getInputStream();
 
@@ -77,6 +80,8 @@ public class NetworkUtils {
             urlConnection.disconnect();
         }
     }
+
+
 
 
 }

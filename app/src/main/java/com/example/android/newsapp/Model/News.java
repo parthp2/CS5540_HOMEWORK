@@ -6,11 +6,11 @@ package com.example.android.newsapp.Model;
 
 public class News {
 
-    private  String author;
+    private String author;
     private String title;
-    private  String desc;
-    private  String url;
-    private  String image;
+    private String desc;
+    private String url;
+    private String imageurl;
     private String date;
 
 
@@ -20,7 +20,7 @@ public class News {
         this.title=title;
         this.desc=desc;
         this.url=url;
-        this.image=image;
+        this.imageurl=image;
         this.date=date;
     }
 
@@ -57,12 +57,12 @@ public class News {
         this.url = url;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageurl() {
+        return imageurl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
     }
 
     public String getDate() {

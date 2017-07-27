@@ -1,12 +1,19 @@
 package com.example.android.newsapp.utilities;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
+import com.example.android.newsapp.Model.Contract;
+import com.example.android.newsapp.Model.DBHelper;
 import com.example.android.newsapp.Model.News;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
@@ -19,6 +26,10 @@ import java.util.jar.JarException;
 
 public class openNewsJsonUtil
 {
+    private static DBHelper helper;
+    private static Cursor cursor;
+    private static SQLiteDatabase db;
+    private static final String TAG = "dbhelper";
 
     public static ArrayList<News> getSimpleNewsJson(Context context, String NewsJsonString)
             throws JSONException
@@ -76,11 +87,21 @@ public class openNewsJsonUtil
 
             News nw=new News(auther,title,desc,url,image,publish);
 
+
            parsenewsdata.add(nw);
 
         }
 
+        if(parsenewsdata.size()>0)
+        {
+            Log.d(TAG,"pass tahy");
+        }
+
         return parsenewsdata;
 
+    }
+
+    public String formatDate(String date) {
+        return String.format("%04d-%02d-%02d", date);
     }
 }
