@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 
 /**
- * Created by ppatel87 on 7/26/2017.
+ * Created by ppatel87 on 7/26/2017. this class have the method to load data from api to database
  */
 
 public class LoadData {

@@ -2,6 +2,7 @@ package com.example.android.newsapp;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.example.android.newsapp.Model.Contract;
 import com.example.android.newsapp.Model.News;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -26,7 +28,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
     static final String TAG = "NewsAdapter";
     private Cursor cursor;
     private ItemClickListener listener;
-    private Context context;
+    private  Context context;
+
+
 
     public NewsAdapter(Cursor cursor ,ItemClickListener listener)
     {
@@ -70,7 +74,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
             mAuthor =(TextView) view.findViewById(R.id.author);
             mTitle = (TextView) view.findViewById(R.id.title);
             mDesc = (TextView) view.findViewById(R.id.desc);
-            mUrl =(TextView) view.findViewById(R.id.url);
+           // mUrl =(TextView) view.findViewById(R.id.url);
             mImage = (ImageView) view.findViewById(R.id.image);
             mDate =(TextView) view.findViewById(R.id.date);
             view.setOnClickListener(this);
@@ -97,9 +101,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsAdapterVie
             mDate.setText(date);
             // url.setText(repo.getUrl());
 
+         //Checking imageUrl and displaying Image using Picasso
+
             if(image !=null)
             {
-                Picasso.with(context).load(image).into(mImage);
+                Log.d(TAG, ""+image);
+                Uri pathUri = Uri.fromFile(new File(image));
+                Picasso.with(holder.mImage.getContext()).load(image).into(mImage);
             }
 
             holder.itemView.setTag(id);

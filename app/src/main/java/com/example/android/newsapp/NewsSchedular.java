@@ -16,7 +16,7 @@ import com.firebase.jobdispatcher.Trigger;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by ppatel87 on 7/26/2017.
+ * Created by ppatel87 on 7/26/2017. created class to make schedule to update database every minute
  */
 
 public class NewsSchedular {
@@ -49,8 +49,6 @@ public class NewsSchedular {
                 // overwrite an existing job with the same tag
                 .setReplaceCurrent(true)
                 // retry with exponential backoff
-                .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
-                // constraints that need to be satisfied for the job to run
                 .setConstraints(
                         // only run on an unmetered network
                         Constraint.ON_ANY_NETWORK

@@ -85,10 +85,14 @@ MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<
         helper = new DBHelper(this);
         db = helper.getWritableDatabase();
 
+        //here we are checking that app is already installed or not if not installed  then load data from database
+
         cursor = getAllItems(db);
 
         newsAdapter  =new NewsAdapter(cursor,this);
         SharedPreferences  f = PreferenceManager.getDefaultSharedPreferences(this);
+
+
 
         boolean check = f.getBoolean("RunFirst", true);
         if (check) {
@@ -103,6 +107,8 @@ MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<
             Log.d(TAG,"n");
         }
 
+
+       //here loading data that is currently into the database into recyclerview
 
         newsAdapter.swapCursor(cursor);
         mRecyclerView.setAdapter(newsAdapter);
@@ -145,6 +151,8 @@ MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<
     protected void onStart() {
         super.onStart();
 
+        //calling firebase dispatcher to update databse every one minute
+
         NewsSchedular.schedule(this);
     }
 
@@ -158,6 +166,7 @@ MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<
     }
 
 
+    //Replaced Asynctask with the AsyncTaskLoader  and  Overriden it's methods
 
         @Override
     public Loader<Void> onCreateLoader(int id,final Bundle args) {
@@ -172,6 +181,8 @@ MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<
 
             @Override
             public Void loadInBackground() {
+
+                //calling LoadData to load data from api to server using network call
 
                 LoadData.DatabaseLoad(MainActivity.this);
 
@@ -196,6 +207,7 @@ MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<
 
             Log.d(TAG, "hh");
 
+        //setting adapter using getting all data from database , recyclerview loading data from database
 
             newsAdapter = new NewsAdapter(cursor,this);
             mRecyclerView.setAdapter(newsAdapter);
@@ -246,6 +258,8 @@ MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<
             startActivity(intent);
         }
     }
+
+    //created cursor for to get all the data from database
 
     private Cursor getAllItems(SQLiteDatabase db) {
         return db.query(
