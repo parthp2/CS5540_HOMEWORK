@@ -159,9 +159,7 @@ MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<
     @Override
     protected void onStop() {
         super.onStop();
-
-        db.close();
-        cursor.close();
+        
         NewsSchedular.stopSchedular(this);
     }
 
